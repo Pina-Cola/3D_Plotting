@@ -12,13 +12,16 @@ timestamps = timestamps(valid);
 binnedTimestamps = round(timestamps / 1e3);  % round timestamps to 1 ms bins
 timeBins = unique(binnedTimestamps);        % list of unique time bins
 
-% Fixed axis limits
-lims = struct('x', [-500, 500], 'y', [-500, 500], 'z', [-1000, 1000]);
+% Reorder: X stays, Z (height) = Y, Y (depth) = Z
+positions = [positions(:,1), positions(:,3), -positions(:,2)];
+
+% Fixed axis limits (update to match reordered axes)
+lims = struct('x', [-500, 500], 'y', [-1000, 1000], 'z', [-500, 500]);
 
 % Set up figure
 figure;
 h = scatter3(nan, nan, nan, 6, 'filled');
-xlabel('X'); ylabel('Y'); zlabel('Z');
+xlabel('X (width)'); ylabel('Z (depth)'); zlabel('Y (height)');
 xlim(lims.x); ylim(lims.y); zlim(lims.z);
 axis manual; view(3); grid on;
 
