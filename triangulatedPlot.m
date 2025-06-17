@@ -1,5 +1,5 @@
 % Load and filter the data
-data = readtable("triangulated_points_27_05_2025_m.csv");
+data = readtable("CSV_Input_Files/triangulated_points_2025_06_02_e.csv");
 timestamps = data.timestamp;
 positions = [data.x, data.y, data.z];
 
